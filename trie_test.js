@@ -11,11 +11,14 @@ WordTrie.prototype.learnWord = function(word) {
 
   var charKey, child;
 
-  // save the first character, then extract/pop it
+  // save the first character, then extract/pop it from word
   charKey = word[0];
   word = word.substr(1);
 
-  this.characters[charKey] = new WordTrie();
+  // add the new character if it doesn't exist already
+  if (this.characters[charKey] === undefined) {    
+    this.characters[charKey] = new WordTrie();
+  }
   if (word.length === 0) {
     this.characters[charKey].isWord = true;
     return;
@@ -25,13 +28,14 @@ WordTrie.prototype.learnWord = function(word) {
   child.learnWord(word);
 };
 
-WordTrie.prototype.printTrieNode = function() {
+WordTrie.prototype.printTrie = function(parent) {
+  console.log("parent: " + parent);
   console.log("isWord: " + this.isWord);
   console.log("kids:   " + Object.keys(this.characters));
   console.log("---------------------------------------");
-  //this.characters.forEach(function(element, index, array) {
-  //   element.printTrie();
-  // });
+  for (var child in this.characters) {
+    this.characters[child].printTrie(child);
+  }
 };
 
 var wt = new WordTrie();
