@@ -4,13 +4,12 @@ function WordTrie() {
 }
 
 WordTrie.prototype.learnWord = function(word) {
-  // reached end of word
+  // reached end of word (or given no word)
   if (word.length === 0) {
     return;
   }
 
   var charKey, child;
-
   // save the first character, then extract/pop it from word
   charKey = word[0];
   word = word.substr(1);
@@ -19,11 +18,14 @@ WordTrie.prototype.learnWord = function(word) {
   if (this.characters[charKey] === undefined) {    
     this.characters[charKey] = new WordTrie();
   }
+
+  // if at end of word, create child node and set isWord to true
   if (word.length === 0) {
     this.characters[charKey].isWord = true;
     return;
   }
 
+  // have the child learn the rest of the word
   child = this.characters[charKey];
   child.learnWord(word);
 };
