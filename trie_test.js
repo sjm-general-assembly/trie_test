@@ -1,6 +1,6 @@
 function WordTrie() {
   this.isWord = false;
-  this.chars = [];
+  this.characters = [];
 }
 
 WordTrie.prototype.learnWord = function(word) {
@@ -15,21 +15,21 @@ WordTrie.prototype.learnWord = function(word) {
   charKey = word[0];
   word = word.substr(1);
 
-  this.chars[charKey] = new WordTrie();
+  this.characters[charKey] = new WordTrie();
   if (word.length === 0) {
-    this.chars[charKey].isWord = true;
+    this.characters[charKey].isWord = true;
     return;
   }
 
-  child = this.chars[charKey];
+  child = this.characters[charKey];
   child.learnWord(word);
 };
 
 WordTrie.prototype.printTrieNode = function() {
   console.log("isWord: " + this.isWord);
-  console.log("kids:   " + Object.keys(this.chars));
+  console.log("kids:   " + Object.keys(this.characters));
   console.log("---------------------------------------");
-  //this.chars.forEach(function(element, index, array) {
+  //this.characters.forEach(function(element, index, array) {
   //   element.printTrie();
   // });
 };
@@ -39,15 +39,15 @@ var word = "bat";
 //wt.learnWord(word);
 
 var y = new WordTrie();
-y.chars['b'] = new WordTrie();
-y.chars['b'].chars['a'] = new WordTrie();
-y.chars['b'].chars['a'].chars['t'] = new WordTrie();
-y.chars['b'].chars['a'].chars['t'].isWord = true;
-y.chars['b'].chars['a'].chars['r'] = new WordTrie();
-y.chars['b'].chars['a'].chars['r'].isWord = true;
-y.chars['b'].chars['y'] = new WordTrie();
-y.chars['b'].chars['y'].chars['e'] = new WordTrie();
-y.chars['b'].chars['y'].chars['e'].isWord = true;
+y.characters['b'] = new WordTrie();
+y.characters['b'].characters['a'] = new WordTrie();
+y.characters['b'].characters['a'].characters['t'] = new WordTrie();
+y.characters['b'].characters['a'].characters['t'].isWord = true;
+y.characters['b'].characters['a'].characters['r'] = new WordTrie();
+y.characters['b'].characters['a'].characters['r'].isWord = true;
+y.characters['b'].characters['y'] = new WordTrie();
+y.characters['b'].characters['y'].characters['e'] = new WordTrie();
+y.characters['b'].characters['y'].characters['e'].isWord = true;
 
 
 
