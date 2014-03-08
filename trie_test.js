@@ -1,9 +1,9 @@
-function WordTrie() {
+Trie = function() {
   this.isWord = false;
-  this.characters = [];
-}
+  this.characters = {};
+};
 
-WordTrie.prototype.learnWord = function(word) {
+Trie.prototype.learn = function(word) {
   // reached end of word (or given no word)
   if (word.length === 0) {
     return;
@@ -16,7 +16,7 @@ WordTrie.prototype.learnWord = function(word) {
 
   // add the new character if it doesn't exist already
   if (this.characters[charKey] === undefined) {    
-    this.characters[charKey] = new WordTrie();
+    this.characters[charKey] = new Trie();
   }
 
   // if at end of word, create child node and set isWord to true
@@ -27,10 +27,10 @@ WordTrie.prototype.learnWord = function(word) {
 
   // have the child learn the rest of the word
   child = this.characters[charKey];
-  child.learnWord(word);
+  child.learn(word);
 };
 
-WordTrie.prototype.printTrie = function(parent) {
+Trie.prototype.printTrie = function(parent) {
   console.log("parent: " + parent);
   console.log("isWord: " + this.isWord);
   console.log("kids:   " + Object.keys(this.characters));
@@ -40,19 +40,19 @@ WordTrie.prototype.printTrie = function(parent) {
   }
 };
 
-var wt = new WordTrie();
+var wt = new Trie();
 var word = "bat";
-//wt.learnWord(word);
+//wt.learn(word);
 
-var y = new WordTrie();
-y.characters['b'] = new WordTrie();
-y.characters['b'].characters['a'] = new WordTrie();
-y.characters['b'].characters['a'].characters['t'] = new WordTrie();
+var y = new Trie();
+y.characters['b'] = new Trie();
+y.characters['b'].characters['a'] = new Trie();
+y.characters['b'].characters['a'].characters['t'] = new Trie();
 y.characters['b'].characters['a'].characters['t'].isWord = true;
-y.characters['b'].characters['a'].characters['r'] = new WordTrie();
+y.characters['b'].characters['a'].characters['r'] = new Trie();
 y.characters['b'].characters['a'].characters['r'].isWord = true;
-y.characters['b'].characters['y'] = new WordTrie();
-y.characters['b'].characters['y'].characters['e'] = new WordTrie();
+y.characters['b'].characters['y'] = new Trie();
+y.characters['b'].characters['y'].characters['e'] = new Trie();
 y.characters['b'].characters['y'].characters['e'].isWord = true;
 
 
