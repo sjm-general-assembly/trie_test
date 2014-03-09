@@ -45,15 +45,15 @@ var word = "bat";
 //wt.learn(word);
 
 var y = new Trie();
-y.characters['b'] = new Trie();
-y.characters['b'].characters['a'] = new Trie();
-y.characters['b'].characters['a'].characters['t'] = new Trie();
-y.characters['b'].characters['a'].characters['t'].isWord = true;
-y.characters['b'].characters['a'].characters['r'] = new Trie();
-y.characters['b'].characters['a'].characters['r'].isWord = true;
-y.characters['b'].characters['y'] = new Trie();
-y.characters['b'].characters['y'].characters['e'] = new Trie();
-y.characters['b'].characters['y'].characters['e'].isWord = true;
+y.characters.b = new Trie();
+y.characters.b.characters.a = new Trie();
+y.characters.b.characters.a.characters.t = new Trie();
+y.characters.b.characters.a.characters.t.isWord = true;
+y.characters.b.characters.a.characters.r = new Trie();
+y.characters.b.characters.a.characters.r.isWord = true;
+y.characters.b.characters.y = new Trie();
+y.characters.b.characters.y.characters.e = new Trie();
+y.characters.b.characters.y.characters.e.isWord = true;
 
 
 
