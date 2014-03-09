@@ -40,6 +40,27 @@ Trie.prototype.printTrie = function(parent) {
   }
 };
 
+Trie.prototype.find = function(word){
+  // if have successfully found preceding letters, and word is now empty, done/at end.
+  if (word === "") {
+    return this;
+  }
+
+  var charKey, child;
+  // get the leading character of current word
+  charKey = word[0];
+  word = word.substr(1);
+
+  if (this.characters[charKey] === undefined) {
+    return null;
+  }
+  else {
+    child = this.characters[charKey];
+  }
+
+  return child.find(word);
+};
+
 var wt = new Trie();
 var word = "bat";
 //wt.learn(word);
