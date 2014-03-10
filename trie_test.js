@@ -40,7 +40,7 @@ Trie.prototype.printTrie = function(parent) {
   }
 };
 
-Trie.prototype.find = function(word){
+Trie.prototype.find = function(word) {
   // if have successfully found preceding letters, and word is now empty, done/at end.
   if (word === "") {
     return this;
@@ -61,9 +61,33 @@ Trie.prototype.find = function(word){
   return child.find(word);
 };
 
+Trie.prototype.getWords = function(wordInProgress) {
+  var words = [];
+  var currWords;
+  var child;
+
+  // if wordInProgress isn't defined yet, make an empty string so str cat (+) will work.
+  if (wordInProgress === undefined) {
+    wordInProgress = "";
+  }
+
+  if (this.isWord) {
+    words.push(wordInProgress);
+    return words;
+  }
+
+  for (var currChar in this.characters) {
+    child = this.characters[currChar];
+    currWords = child.getWords(wordInProgress + currChar);
+    words = words.concat(currWords);
+  }
+  return words;
+};
+
+// ************  testing and samples code ***************
 var wt = new Trie();
 var word = "bat";
-//wt.learn(word);
+wt.learn(word);
 
 var y = new Trie();
 y.characters.b = new Trie();
